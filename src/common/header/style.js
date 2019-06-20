@@ -5,18 +5,22 @@ export const HeaderWrapper = styled.div `
 	z-index: 1;
 	position: relative;
 	height: 56px;
-	border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  min-width: 768px;
+  max-width: 1440px;
+  // margin: 0 auto;
 `;
 
 export const Logo = styled.div `
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: block;
+	// position: absolute;
+	// top: 0;
+  // left: 0;
+  float: left;
 	width: 100px;
-	height: 56px;
-	background: url(${logoPic});
-	background-size: contain;
+  height: 56px;
+  padding: 0;
+	background: url(${logoPic}) no-repeat;
+  background-size: contain;
 `;
 
 export const Nav = styled.div `
@@ -47,16 +51,7 @@ export const NavItem = styled.div `
 export const SearchWrapper = styled.div `
 	position: relative;
   float: left;
-  .iconfont {
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    width: 30px;
-    line-height: 25px;
-    // background: green;
-    text-align: center;
-    border-radius: 15px;
-  }
+  
 	.zoom {
 		position: absolute;
 		right: 5px;
@@ -109,12 +104,22 @@ export const NavSearch = styled.input.attrs({
 
 export const SearchInfo = styled.div `
 	position: absolute;
-	left: 0;
-	top: 56px;
+	left: 30px;
+	top: 61px;
 	width: 240px;
 	padding: 0 20px;
 	box-shadow: 0 0 8px rgba(0, 0, 0, .2);
-	background: #fff;
+  background: #fff;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-bottom-color: #fff;
+    left: 20px;
+    bottom: 99%;
+  }
 `;
 
 export const SearchInfoTitle = styled.div `
@@ -122,20 +127,25 @@ export const SearchInfoTitle = styled.div `
 	margin-bottom: 15px;
 	line-height: 20px;
 	font-size: 14px;
-	color: #969696;
+  color: #969696;
+  overflow: hidden;
 `;
 
 export const SearchInfoSwitch = styled.span `
 	float: right;
-	font-size: 13px;
-	cursor: pointer;
+  font-size: 13px;
+  background-color: transparent;
+  border-width: 0;
+  cursor: pointer;
+  padding: 0;
 	.spin {
-		display: block;
 		float: left;
 		font-size: 12px;
 		margin-right: 2px;
 		transition: all .2s ease-in;
-		transform-origin: center center;
+    transform-origin: center center;
+    line-height: 1;
+    transition: .5s ease;
 	}
 `;
 
@@ -157,10 +167,11 @@ export const SearchInfoItem = styled.a `
 `;
 
 export const Addition = styled.div `
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 56px;
+	// position: absolute;
+	// right: 0;
+	// top: 0;
+  height: 56px;
+  float: right;
 `;
 
 export const Button = styled.div `
@@ -173,10 +184,21 @@ export const Button = styled.div `
 	border: 1px solid #ec6149;
 	font-siz: 14px;
 	&.reg {
-		color: #ec6149;
+    color: #ec6149;
+    transition: .1s ease-in;
+    &:hover {
+      color: #ec6149;
+      border-color: #ec6149;
+      background-color: rgba(236,97,73,.05);
+    }
 	}
 	&.writting {
 		color: #fff;
-		background: #ec6149;
+    background: #ec6149;
+    transition: .1s ease-in;
+    &:hover {
+      color: #fff;
+      background-color: #ec6149;
+    }
 	}
 `
