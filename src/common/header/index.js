@@ -28,7 +28,6 @@ class Header extends Component {
     const {focused, list, page, handleMouseEnter, handleMouseLeave, mouseIn, handleChangePage, totalPage } = this.props;
     const newList = list.toJS();
     let pageList = [];
-    console.log(totalPage);
     
     // 只有异步获取数据后才渲染搜索提示框 不然为空数组
     if (newList.length > 0) {
@@ -47,8 +46,8 @@ class Header extends Component {
         <SearchInfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <SearchInfoTitle>
               热门搜索
-              <SearchInfoSwitch onClick={() => {handleChangePage(page, totalPage)}}>
-              	<i className="iconfont spin">&#xe851;</i>换一批
+              <SearchInfoSwitch onClick={() => {handleChangePage(page, totalPage, this.spinIcon)}}>
+              	<i ref={(icon) => {this.spinIcon = icon}} className="iconfont spin">&#xe685;</i>换一批
               </SearchInfoSwitch>
             </SearchInfoTitle>
             
@@ -126,8 +125,16 @@ const mapDispatchToProps = (dispatch) => {
     handleMouseLeave() {
       dispatch(actionCreators.mouseLeave())
     },
-    handleChangePage(page, totalPage) {
+    handleChangePage(page, totalPage, spinIcon) {
+
+      var originAngle = spinIcon.style.transform.replace(/[^0-9]/ig, '');
       
+      if (!originAngle) {
+        originAngle = 0;
+      } else {
+        originAngle = parseInt(originAngle, 10); // 转number类型
+      }
+      spinIcon.style.transform = `rotate(${originAngle+360}deg)`
       if (page < totalPage) {
         dispatch(actionCreators.changePage(page+1));
       } else {

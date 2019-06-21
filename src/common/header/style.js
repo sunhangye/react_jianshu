@@ -11,7 +11,9 @@ export const HeaderWrapper = styled.div `
   // margin: 0 auto;
 `;
 
-export const Logo = styled.div `
+export const Logo = styled.a.attrs({
+  href: '/'
+}) `
 	// position: absolute;
 	// top: 0;
   // left: 0;
@@ -24,7 +26,7 @@ export const Logo = styled.div `
 `;
 
 export const Nav = styled.div `
-	width: 960px;
+	min-width: 960px;
 	height: 100%;
 	padding-right: 70px;
 	box-sizing: border-box;
@@ -140,12 +142,13 @@ export const SearchInfoSwitch = styled.span `
   padding: 0;
 	.spin {
 		float: left;
-		font-size: 12px;
+		font-size: 15px;
 		margin-right: 2px;
 		transition: all .2s ease-in;
     transform-origin: center center;
     line-height: 1;
     transition: .5s ease;
+    margin-top: 3px;
 	}
 `;
 
