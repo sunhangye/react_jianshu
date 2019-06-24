@@ -89,3 +89,8 @@ styled-components 使用3+版本对用api使用injectGlobal
       width: 160px;
     }
    ```
+#### redux --> action
+
+ 正常返回 object {type:changeDataAction,data}
+
+ redux-thunk 可以返回异步函数 () => {return(dispatch) {axios.get()} }

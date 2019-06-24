@@ -5,7 +5,7 @@ class List extends Component {
     return (
       <div>
         <ListItem>
-          <img className="pic" src="https://p.ssl.qhimg.com/dmfd/125_71_75/t0125402f24540b1ffe.webp?size=357x309" alt=""/>
+          <img className="pic" src="http://upload-images.jianshu.io/upload_images/13253432-3c81387eac9c1610" alt=""/>
           <ListInfo>
             <h3 className="title">如果你被这个星座深深的爱上</h3>
             <p className="desc">

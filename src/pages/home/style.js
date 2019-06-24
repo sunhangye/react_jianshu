@@ -79,5 +79,53 @@ export const ListInfo = styled.div `
 `
 
 export const RecommentWrapper = styled.div `
-  
+  width: 280px;
+  margin: 30px 0;
 `
+
+export const RecommentItem = styled.div `
+  wdith: 280px;
+  height: 50px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  background: pink url(${(props)=>props.imgUrl}) no-repeat top center;
+  background-size: contain;
+`
+export const DownloadWrapper = styled.div `
+  margin-bottom: 30px;
+  padding: 10px 22px;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  background-color: #fff;
+  .qrcode {
+    width: 60px;
+    height: 60px;
+    opacity: .85;
+  }
+`
+
+export const DownloadInfo = styled.div `
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 7px;
+  .title {
+    font-size: 15px;
+    color: #333;
+  }
+  .description {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #999;
+  }
+`
+
+export const WriterWrapper = styled.div `
+	width: 278px;
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	height: 300px;
+	line-height: 300px;
+	text-align: center;
+`;
+
