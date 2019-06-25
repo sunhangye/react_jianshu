@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HomeWrapper, HomeLeft, HomeRight,RecommentWrapper, RecommentItem } from './style';
+import { HomeWrapper, HomeLeft, HomeRight, } from './style';
 import Topic from './components/Topic';
 import List from './components/List';
 import Download from './components/Download';
 import Writter from './components/Writter';
+import Recommend from './components/Recommend';
 import { actionCreators } from './store'
-
+import { BackTop } from './style'
 class Home extends Component {
+  
   componentDidMount() {
     this.props.changeHomeData();
+
   }
   render() {
     return (
@@ -20,15 +23,11 @@ class Home extends Component {
           <List></List>
         </HomeLeft>
         <HomeRight>
-          <RecommentWrapper>
-            <RecommentItem imgUrl="https://cdn2.jianshu.io/assets/web/banner-s-club-aa8bdf19f8cf729a759da42e4a96f366.png"></RecommentItem>
-            <RecommentItem imgUrl="https://cdn2.jianshu.io/assets/web/banner-s-7-1a0222c91694a1f38e610be4bf9669be.png"></RecommentItem>
-            <RecommentItem imgUrl="https://cdn2.jianshu.io/assets/web/banner-s-5-4ba25cf5041931a0ed2062828b4064cb.png"></RecommentItem>
-            <RecommentItem imgUrl="https://cdn2.jianshu.io/assets/web/banner-s-6-c4d6335bfd688f2ca1115b42b04c28a7.png"></RecommentItem>
-          </RecommentWrapper>
+          <Recommend></Recommend>
           <Download></Download>
           <Writter></Writter>
         </HomeRight>
+        <BackTop onClick={() => {window.scrollTo(0, 0)}}>顶部</BackTop>
       </HomeWrapper>
     );
   }

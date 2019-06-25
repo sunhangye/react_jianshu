@@ -94,3 +94,9 @@ styled-components 使用3+版本对用api使用injectGlobal
  正常返回 object {type:changeDataAction,data}
 
  redux-thunk 可以返回异步函数 () => {return(dispatch) {axios.get()} }
+
+react render会执行两次 一次是初始化state,第二次是更新state
+
+梳理下数据改变流程
+
+在reducer中定义articlePage --> 在react-redux取出articlePage赋值到组件的props --> 点击加载更多按钮()=>{getMoreList(page)}将page传到参数中 --> dispatch action dispatch(actionCreators.getMoreList(page)) --> [在actionCreators中定义action {type:ADD_HOME_LIST, page: page} --> 使用react-thunk 进行异步操作 请求数据后dispatch action] --> 接到action 通过immutable 语法 改变page和articleList 返回一个新的state --> 组件接到state自动重新视图层

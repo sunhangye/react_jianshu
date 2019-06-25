@@ -129,3 +129,34 @@ export const WriterWrapper = styled.div `
 	text-align: center;
 `;
 
+export const LoadMore = styled.div `
+  width: 100%;
+	height: 40px;
+	line-height: 40px;
+	margin: 30px 0;
+	background: #a5a5a5;
+	text-align:center;
+	border-radius: 20px;
+	color: #fff;
+	cursor: pointer;
+`
+
+export const BackTop = styled.div `
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1040;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid #dcdcdc;
+  background-color: #fff;
+  transition: .1s ease-in;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: hsla(0,0%,71%,.1);
+    transition: .1s ease-in;
+  }
+`

@@ -1,13 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { RecommentWrapper, RecommentItem } from '../style'
+import { connect } from 'react-redux';
 
-class Recommend extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
+const Recommend = (props) => {
+  const newList = props.list.toJS();
+  
+  return (
+      <RecommentWrapper>
+        {
+          newList.map((item) => (
+          <RecommentItem key={item.id} imgUrl={item.imgUrl}></RecommentItem>
+        ))
+        }
+      </RecommentWrapper>
     );
-  }
 }
 
-export default Recommend;
+const mapStateToProps = (state) => ({
+  list: state.getIn(['home', 'recommendList'])
+})
+
+export default connect(mapStateToProps, null)(Recommend);
