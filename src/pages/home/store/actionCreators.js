@@ -40,3 +40,8 @@ export const getMoreList = (nextpage) => {
   }
 }
 
+export const toggleTopShow = (show) => ({
+  type: actionTypes.TOGGLE_TOP_SHOW,
+  show,
+});
+

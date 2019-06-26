@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom';
 import store from './store'
@@ -9,13 +9,13 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Fragment>
+        <BrowserRouter>
+        <div>
           <Header />
-          <BrowserRouter>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/detail" component={detail}></Route>
-          </BrowserRouter>
-        </Fragment>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/detail" component={detail}></Route>
+          </div>
+        </BrowserRouter>
       </Provider>
     )
   }

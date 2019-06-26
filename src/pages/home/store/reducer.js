@@ -5,10 +5,10 @@ const defaultState = fromJS ({
   articleList: [],
   recommendList: [],
   articlePage: 1,
+  scrollTopShow: false,
 });
 
 export default (state = defaultState, action) => {
-  console.log(action);
   
   switch (action.type) {
     case actionTypes.CHANGE_HOME_DATA:
@@ -22,8 +22,9 @@ export default (state = defaultState, action) => {
         articleList: state.get('articleList').merge(action.result),
         articlePage: fromJS(action.nextpage)
       })
+    case actionTypes.TOGGLE_TOP_SHOW:
+      return state.set('scrollTopShow', action.show)
     default:
       return state;
   }
-  
 }
