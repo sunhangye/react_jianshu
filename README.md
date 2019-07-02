@@ -100,3 +100,19 @@ react render会执行两次 一次是初始化state,第二次是更新state
 梳理下数据改变流程
 
 在reducer中定义articlePage --> 在react-redux取出articlePage赋值到组件的props --> 点击加载更多按钮()=>{getMoreList(page)}将page传到参数中 --> dispatch action dispatch(actionCreators.getMoreList(page)) --> [在actionCreators中定义action {type:ADD_HOME_LIST, page: page} --> 使用react-thunk 进行异步操作 请求数据后dispatch action] --> 接到action 通过immutable 语法 改变page和articleList 返回一个新的state --> 组件接到state自动重新视图层
+
+防止html出现便签，在组件中加上属性props ``` dangerouslySetInnerHTML={{__html:item}} ```
+
+### 路由
+1、 动态路由 / 反斜杠 /id=   `this.props.match.param`
+2、参数传递 id=  从`this.props.location.search`?id=1
+
+### dom获取
+使用styled-components获取真实dom应使用innerRef
+
+### 异步加载组件
+
+使用react-loadable。 将detail异步加载，但detail获取不到match对象，因此使用react中的withRouter
+
+> 高阶组件中的withRouter, 作用是将一个组件包裹进Route里面, 然后react-router的三个对象history, location, match就会被放进这个组件的props属性中.
+

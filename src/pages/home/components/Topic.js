@@ -23,5 +23,6 @@ const Topic = (props) => {
 
 const mapStateToProps = (state) => ({
    list: state.getIn(['home', 'topicList'])
-})
+});
+
 export default connect(mapStateToProps, null)(Topic);

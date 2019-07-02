@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { DownloadWrapper, DownloadInfo } from '../style';
-export default class Download extends Component {
+export default class Download extends PureComponent {
   render() {
     return (
       <DownloadWrapper>

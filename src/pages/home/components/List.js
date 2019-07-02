@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { ListItem, ListInfo, LoadMore } from '../style';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
-import { Link } from 'react-router-dom'
-class List extends Component {
+import { Link } from 'react-router-dom';
+
+class List extends PureComponent {
   render() {
     const { list, page, getMoreList } = this.props;
     const newResult = list.toJS();
@@ -11,7 +12,7 @@ class List extends Component {
       <div>
         {
           newResult.map((item, index) => (
-            <Link to='/detail' key={index}>
+            <Link to={`/detail/${item.id}`} key={index}>
             <ListItem >
               <img className="pic" src={item.imgUrl} alt=""/>
               <ListInfo>
@@ -40,6 +41,6 @@ const mapDispatchToProps = (dispatch) => ({
     
     dispatch(actionCreators.getMoreList(page));
   }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
