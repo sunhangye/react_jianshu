@@ -1,80 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 仿简书react项目
 
-## Available Scripts
+> 本项目仿照简书网站，也是我使用react的第一个完整项目。对有一定`react`基础的同学非常友好，非常适合入门学习。零基础的同学可以参考我的另外一篇文章[react_demo](https://github.com/sunhangye/react_demo)。可以通过`git log`，查看我的学习思路，与我一起学习，一起进步。😀😀
 
-In the project directory, you can run:
 
-### `npm start`
+## 项目使用相关技术和用途
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* 使用官方提供脚手架`create-react-app`初始化项目
+* 数据状态管理使用`redux`
+* 将数据状态绑定到`react`使用`react-redux`
+* 路由跳转使用`react-router-dom`
+* 动画交互使用`styled-components`
+* 异步加载组件使用`react-loadable`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## 项目使用及运行
 
-### `npm test`
+```bash
+git clone git@github.com:sunhangye/react_demo.git
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+cd react_demo
 
-### `npm run build`
+yarn
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+yarn start # 浏览器自动打开localhost:3000
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+yarn build # 上线
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##开发过程笔记
 
-### `npm run eject`
+### **styled-components 使用3+版本对用api使用injectGlobal**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-styled-components 使用3+版本对用api使用injectGlobal
-
-使用react-transition-group  过渡动画
+### **使用react-transition-group  过渡动画**
   
   使用CSSTransition组件传入三个属性值
    * in: boolean 执行状态
    * timeout obj:200 延时时间
    * classNames strng: slide 在css中定义 slide-enter、slide-enter-active、slide-exit、slide-exit-active
+  
    ```
     &.slide-enter {
       transition: all .2s ease-out;
@@ -89,30 +52,40 @@ styled-components 使用3+版本对用api使用injectGlobal
       width: 160px;
     }
    ```
-#### redux --> action
+### **redux-thunk**
 
- 正常返回 object {type:changeDataAction,data}
+ 在redux中action正常返回 `object{type:changeDataAction,data}`
 
- redux-thunk 可以返回异步函数 () => {return(dispatch) {axios.get()} }
+ 而redux-thunk 可以返回异步函数 () => {return(dispatch) {axios.get()} }
+ 
+### **使用高级组件**
+react render会执行两次 一次是初始化state,第二次是更新state，所以为避免多次渲染使用, 将之前`Component`替换为`PurComponent`。
 
-react render会执行两次 一次是初始化state,第二次是更新state
+### **梳理下数据改变、视图更新流程**
 
-梳理下数据改变流程
+1. 在reducer中初始化`articlePage`
+2. 利用`react-redux connect`，将state与组件做关联取出articlePage赋值到组件的props,数据放到`jsx`模板中展示出来
+3. 点击加载更多按钮触发点击事件`onClock={()=>{getMoreList(page)}}`将page传到参数中
+4. 派发action `dispatch(actionCreators.getMoreList(page))`
+5. 在actionCreators中定义action `{type:ADD_HOME_LIST, page: page}`
+6. 使用`react-thunk` 进行异步操作 请求数据后dispatch action
+7. 在reducer中接收到action 通过`immutablejs` 语法 改变page和articleList 返回一个新的state
+8. 组件接到state自动重新视图层
 
-在reducer中定义articlePage --> 在react-redux取出articlePage赋值到组件的props --> 点击加载更多按钮()=>{getMoreList(page)}将page传到参数中 --> dispatch action dispatch(actionCreators.getMoreList(page)) --> [在actionCreators中定义action {type:ADD_HOME_LIST, page: page} --> 使用react-thunk 进行异步操作 请求数据后dispatch action] --> 接到action 通过immutable 语法 改变page和articleList 返回一个新的state --> 组件接到state自动重新视图层
+### **数据嵌套问题**
 
-防止html出现便签，在组件中加上属性props ``` dangerouslySetInnerHTML={{__html:item}} ```
+防止html出现便签，在组件中加上属性props ```dangerouslySetInnerHTML={{__html:item}} ```
 
-### 路由
-1、 动态路由 / 反斜杠 /id=   `this.props.match.param`
-2、参数传递 id=  从`this.props.location.search`?id=1
+### **路由**
 
-### dom获取
+1. 动态路由 / 反斜杠 /id=   然后可以`this.props.match.param`获取ID
+2. 参数传递 id=  从`this.props.location.search`?id=1,然后进行处理
+
+###**dom获取**
 使用styled-components获取真实dom应使用innerRef
 
-### 异步加载组件
+### **异步加载组件**
 
 使用react-loadable。 将detail异步加载，但detail获取不到match对象，因此使用react中的withRouter
 
 > 高阶组件中的withRouter, 作用是将一个组件包裹进Route里面, 然后react-router的三个对象history, location, match就会被放进这个组件的props属性中.
-
